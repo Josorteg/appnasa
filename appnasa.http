@@ -1,0 +1,21 @@
+@appnasa_HostAddress = http://localhost:5086
+
+
+
+//GET {{appnasa_HostAddress}}/weatherforecast/
+//Accept: application/json
+
+@appnasa_HostAddress = http://localhost:5086
+
+GET {{appnasa_HostAddress}}/fuck/
+//Accept:  application/json
+
+###
+
+
+GET {{appnasa_HostAddress}}
+//Accept:  application/png
+
+###
+
+POST 
