@@ -23,12 +23,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 
-
-
-app.MapGet("/", async context =>
+app.MapGet("/", () =>
 {
-    await context.Response.WriteAsync("Bienvenido a la API. Usa /api/planets para obtener información de los planetas.");
+    return Results.Redirect("/index.html"); // Redirigir a index.html
 });
 
 var summaries = new[]

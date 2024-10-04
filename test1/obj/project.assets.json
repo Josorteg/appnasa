@@ -447,11 +447,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/workspaces/appnasa/appnasa.csproj",
+      "projectUniqueName": "/workspaces/appnasa/test1/appnasa.csproj",
       "projectName": "appnasa",
-      "projectPath": "/workspaces/appnasa/appnasa.csproj",
+      "projectPath": "/workspaces/appnasa/test1/appnasa.csproj",
       "packagesPath": "/home/codespace/.nuget/packages/",
-      "outputPath": "/workspaces/appnasa/obj/",
+      "outputPath": "/workspaces/appnasa/test1/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/codespace/.nuget/NuGet/NuGet.Config"

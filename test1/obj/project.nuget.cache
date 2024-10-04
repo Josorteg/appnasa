@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JC64FWhtQg4=",
+  "dgSpecHash": "sEFZYK9WsTY=",
   "success": true,
-  "projectFilePath": "/workspaces/appnasa/appnasa.csproj",
+  "projectFilePath": "/workspaces/appnasa/test1/appnasa.csproj",
   "expectedPackageFiles": [
     "/home/codespace/.nuget/packages/microsoft.aspnetcore.openapi/8.0.8/microsoft.aspnetcore.openapi.8.0.8.nupkg.sha512",
     "/home/codespace/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
