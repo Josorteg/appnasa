@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("appnasa")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5fcde6afc54b9a482caac8a7a9b203c8fc67436f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e0a1b58d55a92009415c5c9445778e8ee0984294")]
 [assembly: System.Reflection.AssemblyProductAttribute("appnasa")]
 [assembly: System.Reflection.AssemblyTitleAttribute("appnasa")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
