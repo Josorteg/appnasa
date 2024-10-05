@@ -36,7 +36,7 @@ const sun = new Star('Sun', 1, 0xffff00, scene, "jpeg");
 const planetsData = [
     { label: 'Mercury', color: 0xaaaaaa, radius: 0.1, orbitParams: { sma: 0.387098, eccentricity: 0.20563, period: 88.0, inclination: 3.38, omega: 48.331, raan: 281.01 } },
     { label: 'Venus', color: 0xffd700, radius: 0.2, orbitParams: { sma: 0.723332, eccentricity: 0.006772, period: 224.701, inclination: 3.86, omega: 76.68, raan: 272.76 } },
-    { label: 'Earth', color: 0xffffff, radius: 0.2, orbitParams: { sma: 1.0, eccentricity: 0.016708, period: 365.25638, inclination: 7.155, omega: -11.26064, raan: 23.439281 } },
+    { label: 'Earth', color: 0xffffff, radius: 0.2, orbitParams: { sma: 1.0, eccentricity: 0.016708, period: 365.25638, inclination: 0.00005, omega: -11.26064, raan: -23.439281 } },
 ];
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.69); // Luz ambiental suave (intensidad 0.5)
@@ -48,6 +48,9 @@ const planets = planetsData.map(data => {
     return new Planet(data.orbitParams, data.label, data.radius, data.color, scene);
 });
 
+planets.forEach(planet => {
+    planet.draw_orbit(scene);
+});
 
 function animate(time) {
     requestAnimationFrame(animate);
