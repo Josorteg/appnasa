@@ -24,9 +24,7 @@ export class CelestialBody {
     constructor(label, radius, color, scene, texture_format = "jpg") {
         let mapTexture;
 
-        this.label = label;
-
-        
+        this.label = label; 
         mapTexture = load_texture_map(label.toLowerCase(), texture_format);
 
         console.log(`${label}: `, mapTexture);
