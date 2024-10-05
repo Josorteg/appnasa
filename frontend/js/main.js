@@ -30,7 +30,7 @@ const planetsData = [
     { label: 'Jupiter', color: 0xffffff, radius: 0.5, texture_format: "jpg", orbitParams: { sma: 2.2044, eccentricity: 0.0489, period: 4332.59, inclination: 1.304, omega: 100.464, raan: 14.75385 } },
     { label: 'Saturn', color: 0xffffff, radius: 0.48, texture_format: "jpg", orbitParams: { sma: 3.5826, eccentricity: 0.0565, period: 10759.22, inclination: 2.485, omega: 113.665, raan: 92.43194 } },
     { label: 'Uranus', color: 0xffffff, radius: 0.35, texture_format: "jpg", orbitParams: { sma: 4.1023, eccentricity: 0.0465, period: 90759.22, inclination: 2.485, omega: 113.665, raan: 92.43194 } },
-    { label: 'Neptuno', color: 0xffffff, radius: 0.35, texture_format: "jpg", orbitParams: { sma: 4.5023, eccentricity: 0.0465, period: 90759.22, inclination: 2.485, omega: 113.665, raan: 92.43194 } }
+    { label: 'Neptune', color: 0xffffff, radius: 0.35, texture_format: "jpg", orbitParams: { sma: 4.5023, eccentricity: 0.0465, period: 90759.22, inclination: 2.485, omega: 113.665, raan: 92.43194 } }
 
 ];
 
