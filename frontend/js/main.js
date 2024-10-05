@@ -31,7 +31,7 @@ console.log(controls);
 
 // console.log(texture);
 
-const sun = new Star('Sun', 1, 0xffffff, scene, "jpeg");
+const sun = new Star('Sun', 1, 0xffff00, scene, "jpeg");
 // sun.add(pointLight);
 const planetsData = [
     { label: 'Mercury', color: 0xaaaaaa, radius: 0.1, orbitParams: { sma: 0.387098, eccentricity: 0.20563, period: 88.0, inclination: 3.38, omega: 48.331, raan: 281.01 } },
@@ -39,7 +39,7 @@ const planetsData = [
     { label: 'Earth', color: 0xffffff, radius: 0.2, orbitParams: { sma: 1.0, eccentricity: 0.016708, period: 365.25638, inclination: 7.155, omega: -11.26064, raan: 23.439281 } },
 ];
 
-const ambientLight = new THREE.AmbientLight(0x888888, 0.5); // Luz ambiental suave (intensidad 0.5)
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.69); // Luz ambiental suave (intensidad 0.5)
 scene.add(ambientLight);
 
 // pointLight.position.set(sun.bodyMesh.position.x, sun.bodyMesh.position.y, sun.bodyMesh.position.z);

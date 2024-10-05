@@ -7,13 +7,13 @@ const textureLoader = new THREE.TextureLoader();
 
 export function load_texture_map(object_name, texture_format)
 {
-    let fail = false;
+    console.log(`hi ${object_name}`);
     const texture = textureLoader.load(
         TEXTURES_PATH`${object_name}${texture_format}`,
         function (){}, function (){},
-        function (){fail = true; console.log(`${object_name} ${texture_format}: Failure`); return null});
+        function (){console.log(`${object_name} ${texture_format}: Failure`); return null});
 
-    if (fail == true)
+    if (!texture)
         return (null);
     texture.wrapS = THREE.ClampToEdgeWrapping;
     texture.wrapT = THREE.ClampToEdgeWrapping;

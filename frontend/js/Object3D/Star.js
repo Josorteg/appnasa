@@ -17,11 +17,11 @@ export class Star extends CelestialBody {
         // this.bodyMesh.material.roughness = 0.5 ;
         this.bodyMesh.material = new THREE.MeshStandardMaterial({
             color: color, // Color del Sol
-            map: load_texture_map(label.toLowerCase(), texture_format),
+            emissiveMap: load_texture_map(label.toLowerCase(), texture_format),
             emissive: color, // Color de emisión
             emissiveIntensity: 2, // Aumentar la intensidad de emisión
-            metalness: 0.5, // Ajusta el metalness si es necesario
-            roughness: 0.5 // Ajusta el roughness si es necesario
+            // metalness: 0.5, // Ajusta el metalness si es necesario
+            // roughness: 0.5 // Ajusta el roughness si es necesario
         });
         this.bodyMesh.add(pointLight);
         // const glowMaterial = new THREE.MeshLambertMaterial({
