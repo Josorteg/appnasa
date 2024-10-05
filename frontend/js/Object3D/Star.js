@@ -3,7 +3,7 @@ import { CelestialBody, load_texture_map } from "./CelestialBody";
 
 export class Star extends CelestialBody {
     constructor(label, radius, color, scene, texture_format = "jpg") {
-        const pointLight = new THREE.PointLight(0xfffffff, 100, 10000);
+        const pointLight = new THREE.PointLight(0xfffffff, 500, 10000);
 
         super(label, radius, color, scene, texture_format);
         this.bodyMesh.material = new THREE.MeshStandardMaterial({
