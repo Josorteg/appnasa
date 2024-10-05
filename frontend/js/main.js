@@ -20,32 +20,23 @@ controls.enableZoom = true;
 
 console.log(controls);
 
-// const pointLight = new THREE.PointLight(0xfffffff, 100, 1000); // Luz blanca, intensidad 1.5, alcance 100
-// scene.add(pointLight);
-
-// const textureLoader = new THREE.TextureLoader();
-// const texture = textureLoader.load('../assets/earth_texture.jpg');
-
-// texture.wrapS = THREE.ClampToEdgeWrapping;
-// texture.wrapT = THREE.ClampToEdgeWrapping;
-
-// console.log(texture);
-
 const sun = new Star('Sun', 1, 0xffff00, scene, "jpeg");
-// sun.add(pointLight);
+
 const planetsData = [
-    { label: 'Mercury', color: 0xaaaaaa, radius: 0.1, orbitParams: { sma: 0.387098, eccentricity: 0.20563, period: 88.0, inclination: 3.38, omega: 48.331, raan: 281.01 } },
-    { label: 'Venus', color: 0xffd700, radius: 0.2, orbitParams: { sma: 0.723332, eccentricity: 0.006772, period: 224.701, inclination: 3.86, omega: 76.68, raan: 272.76 } },
-    { label: 'Earth', color: 0xffffff, radius: 0.2, orbitParams: { sma: 1.0, eccentricity: 0.016708, period: 365.25638, inclination: 0.00005, omega: -11.26064, raan: -23.439281 } },
+    { label: 'Mercury', color: 0xaaaaaa, radius: 0.1, texture_format: "jpg", orbitParams: { sma: 0.387098, eccentricity: 0.20563, period: 88.0, inclination: 3.38, omega: 48.331, raan: 281.01 } },
+    { label: 'Venus', color: 0xffd700, radius: 0.2, texture_format: "jpg", orbitParams: { sma: 0.723332, eccentricity: 0.006772, period: 224.701, inclination: 3.86, omega: 76.68, raan: 272.76 } },
+    { label: 'Earth', color: 0xffffff, radius: 0.2, texture_format: "jpg",orbitParams: { sma: 1.0, eccentricity: 0.016708, period: 365.25638, inclination: 0.00005, omega: -11.26064, raan: -23.439281 } },
+    { label: 'Mars', color: 0xffffff, radius: 0.2, texture_format: "jpg", orbitParams: { sma: 1.523679, eccentricity: 0.0934, period: 686.971, inclination: 1.85061, omega: 49.558, raan: 317.68143 } }
+
 ];
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.69); // Luz ambiental suave (intensidad 0.5)
+/* Luz ambiente   suave (intensidad 0.5) */
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.69);
 scene.add(ambientLight);
 
-// pointLight.position.set(sun.bodyMesh.position.x, sun.bodyMesh.position.y, sun.bodyMesh.position.z);
 
 const planets = planetsData.map(data => {
-    return new Planet(data.orbitParams, data.label, data.radius, data.color, scene);
+    return new Planet(data.orbitParams, data.label, data.radius, data.color, scene, data.texture_format);
 });
 
 planets.forEach(planet => {

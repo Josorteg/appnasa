@@ -31,15 +31,12 @@ export class CelestialBody {
 
         console.log(`${label}: `, mapTexture);
         const geometry = new THREE.SphereGeometry(radius, 32, 32);
-        // const material = new THREE.MeshBasicMaterial({ color, map: texture });
         const material = new THREE.MeshStandardMaterial({ color, map: mapTexture });
-        // const material = new THREE.MeshPhysicalMaterial({ color });
         this.bodyMesh = new THREE.Mesh(geometry, material);
 
         this.object = new THREE.Object3D();
         this.object.add(this.bodyMesh);
         scene.add(this.object);
-        // scene.add(this.bodyMesh);
     }
 
     updatePosition(t) {

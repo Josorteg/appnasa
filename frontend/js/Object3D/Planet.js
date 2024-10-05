@@ -22,9 +22,7 @@ export class Planet extends CelestialBody {
 			z = r * Math.sin(angle);
 
 			const geometry = new THREE.SphereGeometry(0.01, 32, 32);
-			// const material = new THREE.MeshBasicMaterial({ color, map: texture });
 			const material = new THREE.MeshStandardMaterial({ color: this.bodyMesh.material.color });
-			// const material = new THREE.MeshPhysicalMaterial({ color });
 			const bodyMesh = new THREE.Mesh(geometry, material);
 			bodyMesh.position.x = x;
 			bodyMesh.position.z = z;
