@@ -26,12 +26,13 @@ const planetsData = [
     { label: 'Mercury', color: 0xaaaaaa, radius: 0.1, texture_format: "jpg", orbitParams: { sma: 0.387098, eccentricity: 0.20563, period: 88.0, inclination: 3.38, omega: 48.331, raan: 281.01 } },
     { label: 'Venus', color: 0xffd700, radius: 0.2, texture_format: "jpg", orbitParams: { sma: 0.723332, eccentricity: 0.006772, period: 224.701, inclination: 3.86, omega: 76.68, raan: 272.76 } },
     { label: 'Earth', color: 0xffffff, radius: 0.2, texture_format: "jpg",orbitParams: { sma: 1.0, eccentricity: 0.016708, period: 365.25638, inclination: 0.00005, omega: -11.26064, raan: -23.439281 } },
-    { label: 'Mars', color: 0xffffff, radius: 0.2, texture_format: "jpg", orbitParams: { sma: 1.523679, eccentricity: 0.0934, period: 686.971, inclination: 1.85061, omega: 49.558, raan: 317.68143 } }
+    { label: 'Mars', color: 0xffffff, radius: 0.2, texture_format: "jpg", orbitParams: { sma: 1.523679, eccentricity: 0.0934, period: 686.971, inclination: 1.85061, omega: 49.558, raan: 317.68143 } },
+    { label: 'Jupiter', color: 0xffffff, radius: 0.5, texture_format: "jpg", orbitParams: { sma: 2.2044, eccentricity: 0.0489, period: 4332.59, inclination: 1.304, omega: 100.464, raan: 14.75385 } }
 
 ];
 
 /* Luz ambiente   suave (intensidad 0.5) */
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.69);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.80);
 scene.add(ambientLight);
 
 
