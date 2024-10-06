@@ -14,6 +14,7 @@ export class Star extends CelestialBody {
             emissiveIntensity: 2, // Aumentar la intensidad de emisión
         });
         this.bodyMesh.add(pointLight);
+        this.id = this.bodyMesh.material.id;
     }
 
     rotate(speed) {

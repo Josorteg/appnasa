@@ -2,6 +2,8 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { Planet } from './Object3D/Planet.js';
 import { Star } from './Object3D/Star.js';
+import { update } from 'three/examples/jsm/libs/tween.module.js';
+import { color } from 'three/webgpu';
 
 const	CAMERA_FOV_VERTICAL = 75;
 const	CAMERA_ASPECT_RATIO = window.innerWidth / window.innerHeight;
@@ -43,12 +45,132 @@ function	get_base_system_objects(scene)
 	return (objects);
 }
 
+function	get_system_object_by_id({system_objects, id})
+{
+	const	all_objects_array = [...system_objects.planets] + [...system_objects.stars];
+
+	for (let object of all_objects_array)
+		if (object.id == id)
+			return (object);
+	return (null);
+}
+
+// Object hooks
+
+// Constants
+const	ObjectHooks = {
+	HOVER: 1,
+	FOCUS: 1 << 1,
+	CLICK: 1 << 2
+};
+
+// Variables
+const	raycaster = new THREE.Raycaster();
+const	pointer = new THREE.Vector2();
+let		is_clicked = false;
+
+function	__activate_object_hover()
+{
+	const	update_pointer_position = (event) =>
+	{
+		pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+		pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+		return ;
+	}
+	window.addEventListener("pointermove", update_pointer_position);
+	return ;
+}
+
+function	__activate_object_click()
+{
+	function	update_pointer_position_click(event)
+	{
+		is_clicked = true;
+		pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+		pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+		console.log("click");
+		return ;	
+	}
+	console.log("click activated");
+	window.addEventListener("click", update_pointer_position_click);
+	return ;
+}
+
+function	activate_object_hook(event)
+{
+	const	hooks = {};
+
+	hooks[ObjectHooks.HOVER] = __activate_object_hover;
+	hooks[ObjectHooks.FOCUS] = __activate_object_hover;
+	hooks[ObjectHooks.CLICK] = __activate_object_click;
+	for (let hook of Object.keys(hooks))
+	{
+		if (event | hook == hook)
+			hooks[hook]();
+	}
+	return ;
+}
+
+function	get_mouse_hover_object({scene, camera})
+{
+	raycaster.setFromCamera( pointer, camera );
+
+	const	intersects = raycaster.intersectObjects( scene.children );
+
+	if (intersects.length == 0)
+		return (null);
+	return (intersects[0]);
+}
+
+function	manage_hook_hover({system_objects, scene, camera})
+{
+	const	object_hover = get_mouse_hover_object({scene, camera});
+
+	// console.log(object_hover);
+	if (object_hover)
+		object_hover.object.material.color.set(0xFFFFFF);
+	return ;
+}
+
+function	manage_hook_click({system_objects, scene, camera})
+{
+	if (!is_clicked)
+		return ;
+	
+	const	object_hover = get_mouse_hover_object({scene, camera});
+	
+	is_clicked = false;
+	// console.log(object_hover);
+	if (!object_hover)
+		return ;
+	object_hover.object.material.color.set(0xFF0000);
+	// console.log(object_hover.object.material.id);
+	// const	object = get_system_object_by_id({system_objects, id: object_hover.object.material.id});
+
+	// if (object)
+	// 	object.bodyMesh.material.color.set(0xFF0000);	
+	return ;
+}
+
+function	manage_hooks({system_objects, scene, camera})
+{
+	// manage_hook_hover({system_objects, scene, camera});
+	manage_hook_click({system_objects, scene, camera});
+	return ;
+}
+
+// animation
+
 function	get_animate_function({system_objects, camera, scene, renderer, controls})
 {
 	const	sun = system_objects.stars[0];
 	const	planets = system_objects.planets;
 
+	activate_object_hook(ObjectHooks.HOVER | ObjectHooks.CLICK);
+
 	const	animate = time => {
+		manage_hooks({system_objects, scene, camera});
+
 		// Move and rotate planets
 		planets.forEach(planet => {
 			planet.updatePosition(time * 0.001);
@@ -58,8 +180,10 @@ function	get_animate_function({system_objects, camera, scene, renderer, controls
 		// rotate sun
 		sun.rotate(0.001);
 
-		// 
+		// update controls
 		controls.update();
+
+		// render scene
 		renderer.render(scene, camera);
 
 		window.requestAnimationFrame(animate);
@@ -80,7 +204,7 @@ function	run_system(scene, system_objects)
 	/* Control de camara */
 	const	controls = setup_controls(camera, canvas)
 
-	console.log(controls);
+	// console.log(controls);
 
 	const	animate = get_animate_function({system_objects, camera, scene, renderer, controls});
 
@@ -99,7 +223,9 @@ function	main()
 
 	system_objects.planets.forEach(planet => {
 		planet.draw_orbit(scene);
+		console.log(planet.bodyMesh);
 	});
+	console.log(system_objects.stars[0].bodyMesh);
 
 	run_system(scene, system_objects);
 	return ;

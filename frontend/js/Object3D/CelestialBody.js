@@ -7,11 +7,11 @@ const textureLoader = new THREE.TextureLoader();
 
 export function load_texture_map(object_name, texture_format)
 {
-    console.log(`hi ${object_name}`);
+    // console.log(`hi ${object_name}`);
     const texture = textureLoader.load(
         TEXTURES_PATH`${object_name}${texture_format}`,
-        function (){}, function (){},
-        function (){console.log(`${object_name} ${texture_format}: Failure`); return null});
+        undefined, undefined,
+        () => {console.log(`${object_name} ${texture_format}: Failure`); return null});
 
     if (!texture)
         return (null);
@@ -22,19 +22,32 @@ export function load_texture_map(object_name, texture_format)
 
 export class CelestialBody {
     constructor(label, radius, color, scene, texture_format = "jpg") {
+        this.name = label;
+        this.radius = radius;
+        this.color = color;
+        this.bodyMesh = undefined;
+        this.object = undefined;
+        this.id = undefined;
+
+        this.createObjectMesh(texture_format);
+        this.id = this.bodyMesh.material.id;
+        scene.add(this.object);
+    }
+
+    createObjectMesh(texture_format)
+    {
         let mapTexture;
 
-        this.label = label; 
-        mapTexture = load_texture_map(label.toLowerCase(), texture_format);
+        mapTexture = load_texture_map(this.name.toLowerCase(), texture_format);
 
-        console.log(`${label}: `, mapTexture);
-        const geometry = new THREE.SphereGeometry(radius, 32, 32);
-        const material = new THREE.MeshStandardMaterial({ color, map: mapTexture });
+        // console.log(`${label}: `, mapTexture);
+        const geometry = new THREE.SphereGeometry(this.radius, 32, 32);
+        const material = new THREE.MeshStandardMaterial({ color: this.color, map: mapTexture });
         this.bodyMesh = new THREE.Mesh(geometry, material);
 
         this.object = new THREE.Object3D();
         this.object.add(this.bodyMesh);
-        scene.add(this.object);
+        return ;
     }
 
     updatePosition(t) {
