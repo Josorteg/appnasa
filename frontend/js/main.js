@@ -8,7 +8,7 @@ import { color } from 'three/webgpu';
 const	CAMERA_FOV_VERTICAL = 75;
 const	CAMERA_ASPECT_RATIO = window.innerWidth / window.innerHeight;
 const	CAMERA_NEAR_DIST = 0.1;
-const	CAMERA_FAR_DIST = 1000;
+const	CAMERA_FAR_DIST = 100000;
 const	CAMERA_INIT_POSITION = 5;
 
 function	setup_controls(camera, canvas)
@@ -155,7 +155,7 @@ function	manage_hook_click({system_objects, scene, camera})
 function	manage_hooks({system_objects, scene, camera})
 {
 	// manage_hook_hover({system_objects, scene, camera});
-	manage_hook_click({system_objects, scene, camera});
+	// manage_hook_click({system_objects, scene, camera});
 	return ;
 }
 
@@ -206,6 +206,8 @@ function	run_system(scene, system_objects)
 
 	// console.log(controls);
 
+	star_main({scene, camera});
+
 	const	animate = get_animate_function({system_objects, camera, scene, renderer, controls});
 
 	window.requestAnimationFrame(animate);
@@ -232,3 +234,56 @@ function	main()
 }
 
 main();
+
+function	get_random_number_not_zero()
+{
+	let	number;
+
+	number = 0;
+	while (number == 0)
+		number = Math.random() - 0.5;
+	return (number);
+}
+
+function	get_random_particel_pos(particleCount)
+{
+	const	arr = new Float32Array(particleCount * 3);
+
+	for (let i = 0; i < particleCount; i++)
+	{
+		arr[i] = (Math.random() - 0.5) * 1000;
+	}
+	return arr;
+}
+  
+function	star_main({scene, camera})
+{
+	// Geometry
+	const geometrys = [new THREE.BufferGeometry(), new THREE.BufferGeometry()];
+  
+	geometrys[0].setAttribute("position", new THREE.BufferAttribute(get_random_particel_pos(350, camera.position.z), 3));
+	geometrys[1].setAttribute("position", new THREE.BufferAttribute(get_random_particel_pos(1500, camera.position.z), 3));
+  
+	const loader = new THREE.TextureLoader();
+  
+	// material
+	const materials = [
+	  new THREE.PointsMaterial({
+		size: 1,
+		map: loader.load("https://raw.githubusercontent.com/Kuntal-Das/textures/main/sp1.png"),
+		transparent: true
+		// color: "#ff0000"
+	  }),
+	  new THREE.PointsMaterial({
+		size: 1.2,
+		map: loader.load("https://raw.githubusercontent.com/Kuntal-Das/textures/main/sp2.png"),
+		transparent: true
+		// color: "#0000ff"
+	  })
+	];
+  
+	const starsT1 = new THREE.Points(geometrys[0], materials[0]);
+	const starsT2 = new THREE.Points(geometrys[1], materials[1]);
+	scene.add(starsT1);
+	scene.add(starsT2);
+  }
